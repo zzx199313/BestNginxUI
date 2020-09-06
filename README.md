@@ -79,9 +79,9 @@
 
 - 用户名：admin，密码：admin，至此服务端部署完成
 
-  ![image-20200906210910551](C:\Users\wakaka\AppData\Roaming\Typora\typora-user-images\image-20200906210910551.png)
+  ![login](img/login.png)
 
-  ![image-20200906210945340](C:\Users\wakaka\AppData\Roaming\Typora\typora-user-images\image-20200906210945340.png)
+  ![welcome](img/welcom.png)
 
   此时没有任何数据，等客户端启动成功后，就会看到数据。
 
