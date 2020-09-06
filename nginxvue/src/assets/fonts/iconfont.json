@@ -1,0 +1,93 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "383745",
+      "name": "ip",
+      "font_class": "ip",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "1810273",
+      "name": "组织管理",
+      "font_class": "icon-test",
+      "unicode": "e6e4",
+      "unicode_decimal": 59108
+    },
+    {
+      "icon_id": "3876341",
+      "name": "nginx",
+      "font_class": "nginx",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "4066453",
+      "name": "备份恢复",
+      "font_class": "beifenhuifu",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "4075986",
+      "name": "历史",
+      "font_class": "lishi",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "15056492",
+      "name": "文件",
+      "font_class": "wenjian",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "16780728",
+      "name": "登录-密码",
+      "font_class": "denglu-mima",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "16780729",
+      "name": "登录-密码可见",
+      "font_class": "denglu-mimakejian",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "16780731",
+      "name": "登录-输入清空",
+      "font_class": "denglu-shuruqingkong",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "16780732",
+      "name": "登录-密码不可见",
+      "font_class": "denglu-mimabukejian",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "16780733",
+      "name": "登录-验证码",
+      "font_class": "denglu-yanzhengma",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "16780734",
+      "name": "登录-用户名",
+      "font_class": "denglu-yonghuming",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    }
+  ]
+}
