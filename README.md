@@ -81,7 +81,7 @@
 
   ![login](img/login.png)
 
-  ![welcome](img/welcom.png)
+  ![welcome](img/welcome.png)
 
   此时没有任何数据，等客户端启动成功后，就会看到数据。
 
@@ -126,7 +126,7 @@
 
 - 配置文件管理页如下：
 
-  ![image-20200906211201323](C:\Users\wakaka\AppData\Roaming\Typora\typora-user-images\image-20200906211201323.png)
+  ![conf](img/conf.png)
 
 - upsream管理也如下：
-  ![image-20200906211259656](C:\Users\wakaka\AppData\Roaming\Typora\typora-user-images\image-20200906211259656.png)
+  ![upstream](img/upstream.png)
