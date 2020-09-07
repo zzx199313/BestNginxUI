@@ -393,24 +393,24 @@ async def update_backend_server_status(item:BackendServer):
         '''改非80端口'''
         if status == 'down' or status == 'backup':
             if 'down' in res_str or 'backup' in res_str:
-                sed_update = ['sed', '-i.bak', '-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/down|backup/{status}/", file_path]
+                sed_update = ['sed', '-i', '-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/down|backup/{status}/", file_path]
             else:
-                sed_update = ['sed', '-i.bak','-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/\s*;/ {status};/", file_path]
+                sed_update = ['sed', '-i','-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/\s*;/ {status};/", file_path]
         else:
             if 'down' in res_str or 'backup' in res_str:
-                sed_update = ['sed', '-i.bak','-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/down|backup//", file_path]
+                sed_update = ['sed', '-i','-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/down|backup//", file_path]
             else:
                 return {'msg':'修改状态成功','status':200}
     else:
         '''改80端口'''
         if status == 'down' or status == 'backup':
             if 'down' in res_str or 'backup' in res_str:
-                sed_update = ['sed', '-i.bak', '-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/down|backup/{status}/", file_path]
+                sed_update = ['sed', '-i', '-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/down|backup/{status}/", file_path]
             else:
-                sed_update = ['sed','-i.bak','-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/\s*;/ {status};/",file_path]
+                sed_update = ['sed','-i','-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/\s*;/ {status};/",file_path]
         else:
             if 'down' in res_str or 'backup' in res_str:
-                sed_update = ['sed','-i.bak','-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/down|backup//",file_path]
+                sed_update = ['sed','-i','-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/down|backup//",file_path]
             else:
                 return {'msg':'修改状态成功','status':200}
     try:
@@ -424,7 +424,7 @@ async def update_backend_server_status(item:BackendServer):
     #     subprocess.check_output(nginx_check_cmd, stderr=subprocess.STDOUT)
     # except subprocess.CalledProcessError as e:
     #     return {'msg': e.output.decode('utf-8'), 'status': 201}
-    
+
     try:
         '''重新解析配置文件并发送给服务端'''
         await  check_and_parse_nginx_conf()
