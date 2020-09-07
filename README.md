@@ -33,7 +33,7 @@
 
   ~~~ini
   [uvicorn]
-  vicorn服务端启ip和端口
+  ;vicorn服务端启ip和端口
   ip = 192.168.0.45
   port = 18000 
   
