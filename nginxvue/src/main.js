@@ -29,7 +29,7 @@ axios.interceptors.response.use(
       }
     }
     else {
-      Message.error('客户端网络异常')
+      Message.error('网络异常')
       // console.log(error)
     }
     return Promise.reject(error)

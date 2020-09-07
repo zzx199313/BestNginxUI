@@ -94,7 +94,7 @@ export default {
         },
         //修改backend server 的状态
         async changeStatus(backend_server_info, status) {
-            // console.log(backend_server_info)
+            console.log(backend_server_info)
             let params = {
                 client_ip: this.client_ip,
                 file_path: backend_server_info.file_path,

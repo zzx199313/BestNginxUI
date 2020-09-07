@@ -523,5 +523,6 @@ def update_backend_server_status(item:BackendServer):
     except Exception as e:
         logger.error(str(e))
         return {'msg':str(e),'status':201}
+
 if __name__ == '__main__':
     uvicorn.run(app,host=uvicorn_ip,port=uvicorn_port)

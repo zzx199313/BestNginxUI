@@ -64,6 +64,8 @@ nginx_check_cmd=['nginx','-t','-c',nginx_main_conf_path]
 '''nginx -s reload cmd'''
 nginx_reload_cmd=['nginx','-c',nginx_main_conf_path,'-s','reload']
 
+
+
 '''获取nginx -t 结果'''
 def get_check_nginx_conf_result() ->str:
     try:
@@ -393,7 +395,7 @@ async def update_backend_server_status(item:BackendServer):
             if 'down' in res_str or 'backup' in res_str:
                 sed_update = ['sed', '-i.bak', '-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/down|backup/{status}/", file_path]
             else:
-                sed_update = ['sed', '-i.bak','-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/\s+;/ {status};/", file_path]
+                sed_update = ['sed', '-i.bak','-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/\s*;/ {status};/", file_path]
         else:
             if 'down' in res_str or 'backup' in res_str:
                 sed_update = ['sed', '-i.bak','-r', f"/\<server\>\s+{backend_server_addr}[^0-9]+/s/down|backup//", file_path]
@@ -405,22 +407,29 @@ async def update_backend_server_status(item:BackendServer):
             if 'down' in res_str or 'backup' in res_str:
                 sed_update = ['sed', '-i.bak', '-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/down|backup/{status}/", file_path]
             else:
-                sed_update = ['sed','-i.bak','-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/\s+;/ {status};/",file_path]
+                sed_update = ['sed','-i.bak','-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/\s*;/ {status};/",file_path]
         else:
             if 'down' in res_str or 'backup' in res_str:
                 sed_update = ['sed','-i.bak','-r',f"/\<server\>\s+{backend_server_addr}[^:]*;/s/down|backup//",file_path]
             else:
                 return {'msg':'修改状态成功','status':200}
     try:
+        '''执行sed替换命令'''
         subprocess.check_output(sed_update,stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        return {'msg': e.output.decode('utf-8'), 'status': 201}
+
+    # try:
+    #     '''执行nginx -t'''
+    #     subprocess.check_output(nginx_check_cmd, stderr=subprocess.STDOUT)
+    # except subprocess.CalledProcessError as e:
+    #     return {'msg': e.output.decode('utf-8'), 'status': 201}
+    
+    try:
         '''重新解析配置文件并发送给服务端'''
-        await check_and_parse_nginx_conf()
-        try:
-            subprocess.check_output(nginx_reload_cmd, stderr=subprocess.STDOUT)
-            return {'msg': 'nginx配置文件重载重载成功', 'status': 200}
-        except subprocess.CalledProcessError as e:
-            logger.error(e.output.decode('utf-8'))
-            return {'msg': e.output.decode('utf-8'), 'status': 201}
+        await  check_and_parse_nginx_conf()
+        subprocess.check_output(nginx_reload_cmd, stderr=subprocess.STDOUT)
+        logger.info('reload配置成功！')
         res2 = post_nginx_parsed_file_to_server()
         logger.info(json.loads(res2))
         res3 = post_file_path_and_content_dict_to_server()
@@ -429,12 +438,9 @@ async def update_backend_server_status(item:BackendServer):
         logger.info(json.loads(res4))
         logger.info(f'成功修改{backend_server_addr}的状态为{status}')
         return {'msg':'修改状态成功','status':200}
-    except subprocess.CalledProcessError as e:
-        out_bytes = e.output       # Output generated before error
-    #    code      = e.returncode   # Return code
-        out_str = out_bytes.decode('utf-8')
-        logger.error(out_str)
-        return {'msg':out_str,'status':201}
+    except Exception as e:
+        logger.error(str(e))
+        return {'msg':str(e),'status':201}
 
 @app.post('/backend_server/weight/update',description='修改backend_server的权重')
 async def update_backend_server_weight(item:BackendServer):
