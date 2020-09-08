@@ -15,12 +15,15 @@
 ## 环境依赖
 
 - python3.6+
+- 数据库：sqlite3
 
 ## 部署步骤
 
 此项目后端用fastapi开发，前端用vue2.6.12开发。先部署server端，再部署client端。
 
 ### 1、server端部署
+- 安装sqlite3
+  yum -y install sqlite-3.7.17-8.el7_7.1.x86_64
 
 - cd到server目录下，运行以下命令
 
