@@ -18,7 +18,7 @@
 
 ## 部署步骤
 
-此项目后端用fastapi开发，前端用vue3.6.3开发。先部署server端，再部署client端。
+此项目后端用fastapi开发，前端用vue2.6.12开发。先部署server端，再部署client端。
 
 ### 1、server端部署
 
