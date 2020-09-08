@@ -13,7 +13,7 @@
         <el-row>
             <el-col :span="6">
                 <!--搜索框-->
-                <el-input placeholder="请输入upsream,支持模糊查找" v-model="upstream_name">
+                <el-input placeholder="请输入upsream,支持模糊查找" v-model="upstream_name" @keyup.enter.native="read_upstream_info(upstream_name)">
                     <el-button slot="append" icon="el-icon-search" @click="read_upstream_info(upstream_name)"></el-button>
                 </el-input>
             </el-col>
@@ -116,5 +116,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.el-table {
+    .cell {
+        background-color: red;
+    }
+}
 </style>
