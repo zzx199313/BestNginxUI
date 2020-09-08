@@ -23,8 +23,9 @@
 
 ### 1、server端部署
 - 安装sqlite3
-yum -y install sqlite-3.7.17-8.el7_7.1.x86_64
-
+  ~~~shell
+  yum -y install sqlite-3.7.17-8.el7_7.1.x86_64
+  ~~~
 - cd到server目录下，运行以下命令
 
   ```shell
