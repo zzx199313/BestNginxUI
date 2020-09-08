@@ -17,7 +17,7 @@
 - 安装python3.6+
   ~~~shell
   yum -y install python3
-  yum install python3-devel
+  yum -y install python3-devel
   ~~~
 - 安装数据库：sqlite3
   ~~~shell
