@@ -61,7 +61,7 @@ parse_all_nginx_conf_cmd = \
 
 '''nginx -t cmd'''
 nginx_check_cmd=['nginx','-t','-c',nginx_main_conf_path]
-'''nginx -s reload cmd'''
+'''nginx -s cmd'''
 nginx_reload_cmd=['nginx','-c',nginx_main_conf_path,'-s','reload']
 
 
@@ -349,7 +349,7 @@ async def reload_nginx_conf():
 
     try:
         subprocess.check_output(nginx_reload_cmd, stderr=subprocess.STDOUT)
-        return {'msg': 'nginx配置文件重载重载成功', 'status': 200}
+        return {'msg': 'nginx配置文件重载成功', 'status': 200}
     except subprocess.CalledProcessError as e:
         logger.error(e.output.decode('utf-8'))
         return {'msg': e.output.decode('utf-8'), 'status': 201}
