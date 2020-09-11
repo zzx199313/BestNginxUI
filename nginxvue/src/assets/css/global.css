@@ -8,8 +8,9 @@ body,
 }
 .el-breadcrumb{
     /* margin-bottom: 15px; */
-    font-size: 12px;
+    font-size: 15px;
 }
+
 .el-card{
     box-shadow: 0 1px 1px rgb(0, 0, 0, 0.15) !important;
 }

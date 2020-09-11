@@ -9,7 +9,6 @@
     <el-divider></el-divider>
     <!--卡片区域-->
     <el-card class="box-card">
-
         <el-row>
             <el-col :span="6">
                 <!--搜索框-->
@@ -21,28 +20,30 @@
         </el-row>
         <!--表格区域-->
         <el-table :data="all_backend_server_info_list" border stripe highlight-current-row style="color:black;">
-            <el-table-column label="#" type="index"></el-table-column>
-            <el-table-column label="upstream" prop="upstream"></el-table-column>
-            <el-table-column label="backend_server_addr" prop="backend_server_addr"></el-table-column>
-            <el-table-column label="当前状态" prop="status"></el-table-column>
+            <el-table-column align="center" label="#" type="index"></el-table-column>
+            <el-table-column width="150px" align="center" label="upstream" prop="upstream"></el-table-column>
+            <el-table-column width="200px" align="center" label="backend_server_addr" prop="backend_server_addr"></el-table-column>
+            <el-table-column width="80px" align="center" label="当前状态" prop="status"></el-table-column>
             <!--添加插槽-->
-            <el-table-column label=" 修改状态" icon="el-icon-edit">
+            <el-table-column width="140px" align="center" style="display: flex;justify-content: space-between;" label=" 修改状态" icon="el-icon-edit">
                 <template slot-scope="scope">
                     <!-- {{scope.row.status}} -->
                     <!-- 给up状态添加文字提示 -->
-                    <el-tooltip class="item" effect="dark" content="将状态置为空" :enterable="false" placement="top">
-                        <el-popconfirm title="确定将状态置为空吗？" @onConfirm="changeStatus(scope.row,'')">
-                            <el-button v-show="!(scope.row.status == '')" type="success" circle size='small' slot="reference">up</el-button>
+                    <div style="display: flex; justify-content: space-between;">
+                        <el-tooltip v-show="!(scope.row.status == '')" class="item" effect="dark" content="将状态置为空" :enterable="false" placement="top">
+                            <el-popconfirm title="确定将状态置为空吗？" @onConfirm="changeStatus(scope.row,'')">
+                                <el-button type="success" circle size='small' slot="reference">online</el-button>
+                            </el-popconfirm>
+                        </el-tooltip>
+                        <!-- 将状态改为down -->
+                        <el-popconfirm v-show="!(scope.row.status == 'down')" title="确定将状态改为down吗？" @onConfirm="changeStatus(scope.row,'down')">
+                            <el-button type="info" circle size='small' slot="reference">down</el-button>
                         </el-popconfirm>
-                    </el-tooltip>
-                    <!-- 将状态改为down -->
-                    <el-popconfirm title="确定将状态改为down吗？" @onConfirm="changeStatus(scope.row,'down')">
-                        <el-button v-show="!(scope.row.status == 'down')" type="info" circle size='small' slot="reference">down</el-button>
-                    </el-popconfirm>
-                    <!-- 将状态改为backup -->
-                    <el-popconfirm title="确定将状态改为backup吗？" @onConfirm="changeStatus(scope.row,'backup')">
-                        <el-button v-show="!(scope.row.status == 'backup')" type="primary" circle size='small' slot="reference">backup</el-button>
-                    </el-popconfirm>
+                        <!-- 将状态改为backup -->
+                        <el-popconfirm v-show="!(scope.row.status == 'backup')" title="确定将状态改为backup吗？" @onConfirm="changeStatus(scope.row,'backup')">
+                            <el-button type="primary" circle size='small' slot="reference">backup</el-button>
+                        </el-popconfirm>
+                    </div>
                 </template>
             </el-table-column>
             <el-table-column label="ping"></el-table-column>
