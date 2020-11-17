@@ -3,9 +3,9 @@
 
 我认为这是一个更加贴合运维人员思维和操作习惯的nginx配置文件web管理平台。
 
-- 使用简单，不用教就会使用
-- 与nginx解耦，只对配置文件进行CURD，而且随时可插拔，不会影响原配置
-- 采用C/S架构，客户端启动，就会把配置文件推到服务端
+- 使用简单
+- 与nginx解耦，随时可插拔
+- 采用C/S架构，客户端启动，就会把配置文件推到服务端，服务端自动完成初始化，无需手动初始化
 - 以文件为颗粒度进行配置文件的修改
 - 对upstream的管理非常方便，一键操作upstream中server的状态
 - 可以同时管理多个nginx
@@ -62,26 +62,7 @@
   python3 server.py &
   ```
 
-- 前端页面用vue开发，需要用nginx运行，需要先下载nginx，然后配置网页根目录为dist目录
-
-  ~~~nginx
-  server {
-      listen 80;
-      server_name localhost;
-      location / {
-          root 这里为dist目录绝对路径;  #配置网页根目录
-          index index.html index.htm;
-      }
-      error_page 500 502 503 504 /50x.html;
-      location = /50x.html {
-          root /usr/share/nginx/html;
-      }
-  }
-  ~~~
-
-- 
-
-- 访问 http://ip ，
+- 访问 http://192.168.0.45:18000，
 
 - 用户名：admin，密码：admin，至此服务端部署完成
 
@@ -93,7 +74,7 @@
 
 ### 2、client端部署
 
-- client端，要跟需要被管理的nginx，部署在同一台机器上。
+- client端，部署在需要被管理的nginx上。
 
 - cd到client目录下，运行以下命令
 
