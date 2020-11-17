@@ -2,6 +2,9 @@ from configparser import  ConfigParser
 import sqlite3
 import hashlib
 from fastapi import FastAPI, File, UploadFile, Body,Query, HTTPException, Depends, status
+from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.staticfiles import StaticFiles
+from starlette.responses import FileResponse
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 import jwt
 from jwt import PyJWTError
@@ -54,6 +57,9 @@ passwd_context = CryptContext(schemes=["bcrypt"])
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 app= FastAPI()
+app.mount("/static", StaticFiles(directory="dist/static"), name="static")
+app.add_middleware(GZipMiddleware, minimum_size=1000)
+
 
 #用户登录验证和token方法集：
 def verify_password(plain_password, hashed_password):
@@ -185,6 +191,10 @@ def get_client_port(client_ip) ->str:
     return config_ini.get('client',client_ip)
 
 
+@app.get("/")
+async def get_index():
+    return FileResponse('dist/index.html')
+    
 #response_model=Token
 @app.post("/login")
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
